@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Log directory under pub/media
-    $logDir = __DIR__ . '/pub/media/feed/tmp/log';
+    $logDir = __DIR__ . '/media/feed/tmp/log';
     if (!is_dir($logDir)) {
         mkdir($logDir, 0755, true);
     }
